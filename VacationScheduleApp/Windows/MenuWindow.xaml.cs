@@ -46,18 +46,7 @@ namespace VacationScheduleApp.Windows
             MenuFrame.Navigate(new UserPage());
         }
 
-        private List<User> GenerateUser()
-        {
-            string[] maleForenames = {"Артём", "Никита", "Фёдор", "Богдан", "Тимофей"};
-            string[] femaleForenames = { "Ярослава", "Дарья", "Арина", "Елизавета", "Анна"};
-
-            string[] maleSurnames = { "Ярослава", "Дарья", "Артём", "Никита", "Арина", "Фёдор", "Елизавета", "Богдан", "Тимофей", "Анна" };
-
-            List<User> userList = new List<User>();
-
-
-            return userList;
-        }
+     
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
