@@ -5,8 +5,147 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VacationScheduleApp.Windows"
         mc:Ignorable="d"
-        Title="MenuWindow" Height="450" Width="800">
+        Title="График отпусков"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Height="720" 
+        Width="1280">
+    <Window.Resources>
+       
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                SnapsToDevicePixels="true">
+                            <Grid>
+                                <Ellipse Name="PART_Ellipse"/>
+                                <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              Margin="{TemplateBinding Padding}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" 
+                                                Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Fill" TargetName="PART_Ellipse" 
+                                                Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome NonClientFrameEdges="None" 
+                      CaptionHeight="40" 
+                      ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="WhiteSmoke"/>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}"
+               BasedOn="{StaticResource BaseButtonStyle}">
+                    <Setter Property="Width" Value="120"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Margin" Value="5 10 5 5"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+                    <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Сотрудники"
+                    Name="UserButton"
+                    Click="UserButton_Click"/>
+            <Button Content="Отпуска"
+                    Name="VacationButton"
+                    Click="VacationButton_Click"/>
+            <Button Content="Роли"
+                    Name="RoleButton"
+                    Click="RoleButton_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0 5 20 0">
+            <Button Name="HiddenButton"
+                    Click="HiddenButton_Click"
+                    ToolTip="Свернуть">
+                <Border Height="3"
+                        Width="18"
+                        CornerRadius="1"
+                        Background="Black"/>
+            </Button>
+            <Button Name="StateButton"
+                    Click="StateButton_Click"
+                    ToolTip="Полноэкранный режим">
+                <Border Height="18"
+                        Width="18"
+                        CornerRadius="1"
+                        BorderThickness="2"
+                        BorderBrush="Black"
+                        Background="Transparent"/>
+            </Button>
+            <Button Name="ExitButton" 
+                    Click="ExitButton_Click"
+                    ToolTip="Закрыть">
+                <Path Data="{StaticResource ExitPathData}" 
+                      Fill="Black" 
+                      Stretch="Fill" 
+                      RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left"
+                    Orientation="Horizontal"
+                    Margin="10 10 0 0">
+            <Button Name="LogoutButton" 
+                    Click="LogoutButton_Click"
+                    Padding="1"
+                    ToolTip="Перейти к окну авторизации">
+                <Path Data="{StaticResource  OpenPathData}" 
+                      Fill="Black" 
+                      Stretch="Fill" Stroke="Black">
+                </Path>
+            </Button>
+        </StackPanel>
+        <Frame NavigationUIVisibility="Hidden"
+               Name="MenuFrame"/>
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VacationScheduleApp.Windows;
 
 namespace VacationScheduleApp
 {
@@ -27,7 +28,19 @@ namespace VacationScheduleApp
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            DragMove();
+        }
 
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            MenuWindow window = new MenuWindow();
+            window.Show();
+            Close();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
