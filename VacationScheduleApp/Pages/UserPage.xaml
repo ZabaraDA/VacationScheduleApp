@@ -4,11 +4,57 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VacationScheduleApp.Pages"
+      xmlns:model="clr-namespace:VacationScheduleApp.Models"
+      xmlns:converter="clr-namespace:VacationScheduleApp.Converters"  
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserPage">
+      d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="White"/>
+        <DataGrid Name="UserListBox"
+                  Margin="10"
+                 Grid.Row="1"
+                 Background="WhiteSmoke"
+                 HorizontalContentAlignment="Stretch"
+                 HorizontalAlignment="Stretch"
+                 ColumnWidth="auto"
+                 AutoGenerateColumns="False"
+                 GridLinesVisibility="Horizontal"
+                 IsReadOnly="True"
+                 FontFamily="{StaticResource Blogger Sans}"
+                 FontSize="18">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Margin" Value="2 0"/>
+                </Style>
+                <converter:AgeConverter x:Key="AgeConverter"/>
+                <converter:GenderConverter x:Key="GenderConverter"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                                    Header="Код"/>
+                <DataGridTextColumn Binding="{Binding Surname}"
+                                    Header="Фамилия"/>
+                <DataGridTextColumn Binding="{Binding Forename}"
+                                    Header="Имя"/>
+                <DataGridTextColumn Binding="{Binding Patronymic}"
+                                    Header="Отчество"/>
+                <DataGridTextColumn Binding="{Binding Gender,Converter={StaticResource GenderConverter}}"
+                                    Header="Пол"/>
+                <DataGridTextColumn Binding="{Binding Role.Name}"
+                                    Header="Должность"/>
+                <DataGridTextColumn Binding="{Binding DateOfBirth, Converter={StaticResource AgeConverter}}"
+                                    Header="Возраст"/>
+                <DataGridTextColumn Binding="{Binding DateOfBirth, ConverterCulture='ru-RU',StringFormat='dd.MM.yyyy'}"
+                                    Header="Дата рождения"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
     </Grid>
 </Page>

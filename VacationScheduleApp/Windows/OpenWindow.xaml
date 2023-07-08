@@ -7,11 +7,12 @@
         mc:Ignorable="d" 
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        Height="450" 
-        Width="300">
+        Height="480" 
+        Width="320">
     <Window.Resources>
       
         <Style TargetType="{x:Type Button}"
@@ -26,9 +27,13 @@
     </Window.Resources>
     <Grid>
         <Border CornerRadius="10"
-                Background="White">
+                Background="White"
+                Margin="10">
             <Border.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect Direction="0" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="15" 
+                                  Opacity="0.6"/>
             </Border.Effect>
         </Border>
         <StackPanel HorizontalAlignment="Center"

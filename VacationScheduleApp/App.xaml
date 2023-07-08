@@ -1,18 +1,16 @@
 ﻿<Application x:Class="VacationScheduleApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:VacationScheduleApp"
-             
+             xmlns:local="clr-namespace:VacationScheduleApp"  
              StartupUri="Windows/OpenWindow.xaml">
     <Application.Resources>
-        
         <ResourceDictionary>
-           
             <ResourceDictionary.MergedDictionaries>
                 <!--#region Styles Dictionary-->
                 <ResourceDictionary Source="Styles\GeometryDictionary.xaml"/>
                 <ResourceDictionary Source="Styles\FontFamilyDictionary.xaml"/>
                 <ResourceDictionary Source="Styles\ButtonStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles\ListBoxStyleDictionary.xaml"/>
                 <!--#endregion-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VacationScheduleApp.Models;
 
 namespace VacationScheduleApp.Pages
 {
@@ -20,9 +21,10 @@ namespace VacationScheduleApp.Pages
     /// </summary>
     public partial class UserPage : Page
     {
-        public UserPage()
+        public UserPage(List<User> userList)
         {
             InitializeComponent();
+            UserListBox.ItemsSource = userList;
         }
     }
 }

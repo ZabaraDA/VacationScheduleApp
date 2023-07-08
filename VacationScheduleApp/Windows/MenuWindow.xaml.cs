@@ -35,18 +35,76 @@ namespace VacationScheduleApp.Windows
             new Role(7, "Разработчик"),
             new Role(8, "Технолог"),
             new Role(9, "Конструктор"),
-            new Role(10, "Разнорабочий")
+            new Role(10, "Бухгалтер")
         };
-
-        
+        List<User> _userList;
 
         public MenuWindow()
         {
             InitializeComponent();
-            MenuFrame.Navigate(new UserPage());
+            _userList = GenerateUser();
+            MenuFrame.Navigate(new UserPage(_userList));
         }
 
-     
+        private List<User> GenerateUser()
+        {
+            int id = 100000;
+
+            string[] maleForenames = { "Артём", "Никита", "Фёдор", "Богдан", "Тимофей" };
+            string[] femaleForenames = { "Ярослава", "Дарья", "Арина", "Елизавета", "Анна" };
+
+            string[] surnames = { "Петров", "Сидоров", "Иванов", "Никитин", "Фёдоров" };
+            string[] patronymic = { "Алексеев", "Тимофеев", "Матвеев", "Константинов", "Робертов" };
+
+            List<User> userList = new List<User>();
+            Random random = new Random();
+
+            bool gender = true;
+
+            for (int i = 0; i < 1000; i++)
+            {
+                User currentUser = new User();
+
+                currentUser.Id = ++id;
+
+                if (gender)
+                {
+                    currentUser.Forename = femaleForenames[random.Next(femaleForenames.Length - 1)];
+                    currentUser.Surname = surnames[random.Next(femaleForenames.Length - 1)] + "а";
+                    currentUser.Patronymic = patronymic[random.Next(femaleForenames.Length - 1)] + "на";
+                }
+                else
+                {
+                    currentUser.Forename = maleForenames[random.Next(maleForenames.Length - 1)];
+                    currentUser.Surname = surnames[random.Next(femaleForenames.Length - 1)];
+                    currentUser.Patronymic = patronymic[random.Next(femaleForenames.Length - 1)] + "ич";
+                }
+
+                currentUser.Role = _roleList[random.Next(_roleList.Count - 1)];
+
+                currentUser.DateOfBirth = new DateTime(random.Next(DateTime.Now.Year - 59, DateTime.Now.Year - 18), random.Next(1, 12), random.Next(1, 28));
+
+                currentUser.Gender = gender;
+                gender = !gender;
+
+                currentUser.Vacation = GenerateVacation();
+
+                userList.Add(currentUser);
+
+            }
+
+
+            return userList;
+        }
+
+        private List<Vacation> GenerateVacation()
+        {
+            List<Vacation> vacationList = new List<Vacation>();
+
+
+
+            return vacationList;
+        }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -55,7 +113,7 @@ namespace VacationScheduleApp.Windows
 
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuFrame.Navigate(new UserPage());
+            MenuFrame.Navigate(new UserPage(_userList));
         }
 
         private void VacationButton_Click(object sender, RoutedEventArgs e)

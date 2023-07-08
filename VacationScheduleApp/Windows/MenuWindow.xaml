@@ -9,6 +9,8 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        MinWidth="600"
+        MinHeight="480"
         Height="720" 
         Width="1280">
     <Window.Resources>
@@ -146,6 +148,7 @@
             </Button>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden"
-               Name="MenuFrame"/>
+               Name="MenuFrame"
+               Grid.Row="1"/>
     </Grid>
 </Window>
