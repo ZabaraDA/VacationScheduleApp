@@ -61,7 +61,7 @@ namespace VacationScheduleApp.Windows
 
             bool gender = true;
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 User currentUser = new User();
 
@@ -92,7 +92,6 @@ namespace VacationScheduleApp.Windows
                 userList.Add(currentUser);
 
             }
-
 
             return userList;
         }
