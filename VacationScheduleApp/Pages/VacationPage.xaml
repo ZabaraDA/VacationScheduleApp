@@ -4,11 +4,130 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VacationScheduleApp.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:converter="clr-namespace:VacationScheduleApp.Converters"
+      mc:Ignorable="d"
       Title="VacationPage">
+    <Page.Resources>
+        <converter:DayConverter x:Key="DayConverter"/>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="InfoTextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="10 0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type Button}"
+                       BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Width" Value="210"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5 0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}"
+                       BasedOn="{StaticResource ComboBoxBaseStyle}">
+            <Setter Property="Width" Value="210"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5 0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+        </Style>
+    </Page.Resources>
+    <Grid HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"
+                    Margin="0 10 10 10"
+                    HorizontalAlignment="Left"
+                    Background="WhiteSmoke">
+            <TextBlock Text="Пересечения"/>
+            <ComboBox Name="IntersectionComboBox"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="С пересечением"/>
+                <ComboBoxItem Content="Без пересечения"/>
+            </ComboBox>
+            <TextBlock Text="Возраст"
+                       Style="{StaticResource InfoTextBlock}"/>
+            <ComboBox Name="AgeComboBox"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="Все возраста"/>
+                <ComboBoxItem Content="Моложе 30 лет"/>
+                <ComboBoxItem Content="Старше 30 но моложе 50 лет"/>
+                <ComboBoxItem Content="Старше 50 лет"/>
+            </ComboBox>
 
-    <Grid>
-        
+            <TextBlock Text="Пол"
+                       Style="{StaticResource InfoTextBlock}"/>
+            <ComboBox Name="GenderComboBox"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="Любой пол"/>
+                <ComboBoxItem Content="Мужской"/>
+                <ComboBoxItem Content="Женский"/>
+            </ComboBox>
+
+            <TextBlock Text="Должность(отдел)"
+                       Style="{StaticResource InfoTextBlock}"/>
+            <ComboBox Name="RoleComboBox"/>
+            
+            <Button Content="Найти пересечения"
+                    Name="IntersectionVacationButton"
+                    Click="IntersectionVacationButton_Click"/>
+            <Button Content="Новый отпуск"
+                    Name="AddVacationButton"
+                    Click="AddVacationButton_Click"/>
+            
+        </StackPanel>
+        <DataGrid Name="VacationDataGrid"
+                  BorderThickness="0 0 0 1"
+                  BorderBrush="LightGray"
+                  Margin="10"
+                  Background="LightGray" 
+                  AutoGenerateColumns="False"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="LightGray"
+                  HorizontalAlignment="Right"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                                    Header="Код"/>
+                <DataGridTextColumn Binding="{Binding StartDate, ConverterCulture='ru-RU',StringFormat='dd.MM.yyyy'}"
+                                    Header="Дата начала"/>
+                <DataGridTextColumn Binding="{Binding EndDate, ConverterCulture='ru-RU',StringFormat='dd.MM.yyyy'}"
+                                    Header="Дата окончания"/>
+                <DataGridTextColumn Header="Количество дней">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource DayConverter}">
+                            <Binding Path="StartDate"/>
+                            <Binding Path="EndDate"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Сотрудник">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="User.Surname"/>
+                            <Binding Path="User.Forename"/>
+                            <Binding Path="User.Patronymic"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

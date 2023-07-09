@@ -37,19 +37,22 @@ namespace VacationScheduleApp.Windows
             new Role(9, "Конструктор"),
             new Role(10, "Бухгалтер")
         };
-        List<User> _userList;
+        private List<User> _userList;
+        private List<Vacation> _vacationList;
+
+        private int _vacationCount;
 
         public MenuWindow()
         {
             InitializeComponent();
+            _vacationList = new List<Vacation>();
             _userList = GenerateUser();
             MenuFrame.Navigate(new UserPage(_userList));
         }
 
         private List<User> GenerateUser()
         {
-            int id = 100000;
-
+            int userId = 100000;
             string[] maleForenames = { "Артём", "Никита", "Фёдор", "Богдан", "Тимофей" };
             string[] femaleForenames = { "Ярослава", "Дарья", "Арина", "Елизавета", "Анна" };
 
@@ -65,7 +68,7 @@ namespace VacationScheduleApp.Windows
             {
                 User currentUser = new User();
 
-                currentUser.Id = ++id;
+                currentUser.Id = ++userId;
 
                 if (gender)
                 {
@@ -82,12 +85,14 @@ namespace VacationScheduleApp.Windows
 
                 currentUser.Role = _roleList[random.Next(_roleList.Count - 1)];
 
-                currentUser.DateOfBirth = new DateTime(random.Next(DateTime.Now.Year - 59, DateTime.Now.Year - 18), random.Next(1, 12), random.Next(1, 28));
+                currentUser.DateOfBirth = new(random.Next(DateTime.Now.Year - 59, DateTime.Now.Year - 18),
+                                              random.Next(1, 12),
+                                              random.Next(1, 28));
 
                 currentUser.Gender = gender;
                 gender = !gender;
 
-                currentUser.Vacation = GenerateVacation();
+                currentUser.Vacation = GenerateVacation(currentUser,random);
 
                 userList.Add(currentUser);
 
@@ -96,12 +101,33 @@ namespace VacationScheduleApp.Windows
             return userList;
         }
 
-        private List<Vacation> GenerateVacation()
+        private List<Vacation> GenerateVacation(User selectedUser, Random random)
         {
             List<Vacation> vacationList = new List<Vacation>();
 
+            bool isLongVacation = true;
 
+            for (int i = 0; i < 3; i++)
+            {
+                Vacation currentVacation = new Vacation(selectedUser);
 
+                currentVacation.Id = ++_vacationCount;
+                
+                currentVacation.StartDate = new(DateTime.Now.Year,
+                                                random.Next(DateTime.Now.Month, 12),
+                                                random.Next(DateTime.Now.Day, 28));
+                if (isLongVacation)
+                {
+                    currentVacation.EndDate = currentVacation.StartDate.AddDays(14);
+                    isLongVacation = false;
+                }
+                else
+                {
+                    currentVacation.EndDate = currentVacation.StartDate.AddDays(7);
+                }
+                vacationList.Add(currentVacation);
+            }
+            _vacationList.AddRange(vacationList);
             return vacationList;
         }
 
@@ -117,7 +143,7 @@ namespace VacationScheduleApp.Windows
 
         private void VacationButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuFrame.Navigate(new VacationPage());
+            MenuFrame.Navigate(new VacationPage(_vacationList));
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

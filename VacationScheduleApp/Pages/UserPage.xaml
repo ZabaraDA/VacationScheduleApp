@@ -5,33 +5,38 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VacationScheduleApp.Pages"
       xmlns:model="clr-namespace:VacationScheduleApp.Models"
-      xmlns:converter="clr-namespace:VacationScheduleApp.Converters"  
+      xmlns:converter="clr-namespace:VacationScheduleApp.Converters"   
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Background="White"/>
-        <DataGrid Name="UserListBox"
+        <DataGrid Name="UserDataGrid"
+                  BorderThickness="0 0 0 1"
+                  BorderBrush="LightGray"
                   Margin="10"
-                 Grid.Row="1"
-                 Background="WhiteSmoke"
-                 HorizontalContentAlignment="Stretch"
-                 HorizontalAlignment="Stretch"
-                 ColumnWidth="auto"
-                 AutoGenerateColumns="False"
-                 GridLinesVisibility="Horizontal"
-                 IsReadOnly="True"
-                 FontFamily="{StaticResource Blogger Sans}"
-                 FontSize="18">
+                  Grid.Row="1"
+                  Background="LightGray" 
+                  AutoGenerateColumns="False"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="LightGray"
+                  HorizontalAlignment="Center"
+                  IsReadOnly="True">
             <DataGrid.Resources>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+                <Style TargetType="{x:Type Button}"
+                       BasedOn="{StaticResource BaseButtonStyle}">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Margin" Value="5 0"/>
+                    <Setter Property="Padding" Value="5 0"/>
                     <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="Margin" Value="2 0"/>
+                    <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="BorderThickness" Value="1"/>
                 </Style>
                 <converter:AgeConverter x:Key="AgeConverter"/>
                 <converter:GenderConverter x:Key="GenderConverter"/>
@@ -50,11 +55,45 @@
                 <DataGridTextColumn Binding="{Binding Role.Name}"
                                     Header="Должность"/>
                 <DataGridTextColumn Binding="{Binding DateOfBirth, Converter={StaticResource AgeConverter}}"
-                                    Header="Возраст"/>
+                                    Header="Возраст"
+                                    TextBlock.TextAlignment="Center">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding DateOfBirth, ConverterCulture='ru-RU',StringFormat='dd.MM.yyyy'}"
-                                    Header="Дата рождения"/>
+                                    Header="Дата рождения">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Управление">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        Margin="10 0">
+                                <Button Content="Новый отпуск"
+                                    Name="AddVacationButton"
+                                    Click="AddVacationButton_Click"/>
+                                <Button Content="Просмотр отпусков"
+                                    Name="ViewVacationButton"
+                                    Click="ViewVacationButton_Click"/>
+                                
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
-            
         </DataGrid>
     </Grid>
 </Page>

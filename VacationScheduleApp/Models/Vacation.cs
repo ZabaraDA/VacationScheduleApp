@@ -12,11 +12,8 @@ namespace VacationScheduleApp.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public User User { get; set; }
-        public Vacation(int id, DateTime startDate, DateTime endDate,User user)
+        public Vacation(User user)
         {
-            Id = id;
-            StartDate = startDate;
-            EndDate = endDate;
             User = user;
         }
     }

@@ -24,7 +24,17 @@ namespace VacationScheduleApp.Pages
         public UserPage(List<User> userList)
         {
             InitializeComponent();
-            UserListBox.ItemsSource = userList;
+            UserDataGrid.ItemsSource = userList;
+        }
+
+        private void ViewVacationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddVacationButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

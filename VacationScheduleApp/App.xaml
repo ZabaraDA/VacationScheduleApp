@@ -10,7 +10,8 @@
                 <ResourceDictionary Source="Styles\GeometryDictionary.xaml"/>
                 <ResourceDictionary Source="Styles\FontFamilyDictionary.xaml"/>
                 <ResourceDictionary Source="Styles\ButtonStyleDictionary.xaml"/>
-                <ResourceDictionary Source="Styles\ListBoxStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles\DataGridStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Styles\ComboBoxStyleDictionary.xaml"/>
                 <!--#endregion-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
