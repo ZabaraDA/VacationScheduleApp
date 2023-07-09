@@ -51,12 +51,8 @@
                     Margin="0 10 10 10"
                     HorizontalAlignment="Left"
                     Background="WhiteSmoke">
-            <TextBlock Text="Пересечения"/>
-            <ComboBox Name="IntersectionComboBox"
-                      SelectedIndex="0">
-                <ComboBoxItem Content="С пересечением"/>
-                <ComboBoxItem Content="Без пересечения"/>
-            </ComboBox>
+            <TextBlock Text="Фильтрация"/>
+           
             <TextBlock Text="Возраст"
                        Style="{StaticResource InfoTextBlock}"/>
             <ComboBox Name="AgeComboBox"
@@ -78,11 +74,17 @@
 
             <TextBlock Text="Должность(отдел)"
                        Style="{StaticResource InfoTextBlock}"/>
-            <ComboBox Name="RoleComboBox"/>
-            
-            <Button Content="Найти пересечения"
-                    Name="IntersectionVacationButton"
-                    Click="IntersectionVacationButton_Click"/>
+            <ComboBox Name="RoleComboBox"
+                      SelectedIndex="0"/>
+
+            <TextBlock Text="Пересечение"
+                       Style="{StaticResource InfoTextBlock}"/>
+            <ComboBox Name="IntersectionComboBox"
+                      SelectedIndex="0">
+                <ComboBoxItem Content="С пересечением"/>
+                <ComboBoxItem Content="Без пересечения"/>
+            </ComboBox>
+
             <Button Content="Новый отпуск"
                     Name="AddVacationButton"
                     Click="AddVacationButton_Click"/>
@@ -118,6 +120,7 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
+                
                 <DataGridTextColumn Header="Сотрудник">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} {1} {2}">
@@ -127,6 +130,8 @@
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding User.Role.Name}"
+                                    Header="Должность"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -66,7 +66,7 @@ namespace VacationScheduleApp.Windows
 
             for (int i = 0; i < 100; i++)
             {
-                User currentUser = new User();
+                User currentUser = new User(_roleList[random.Next(_roleList.Count)]);
 
                 currentUser.Id = ++userId;
 
@@ -82,8 +82,6 @@ namespace VacationScheduleApp.Windows
                     currentUser.Surname = surnames[random.Next(femaleForenames.Length - 1)];
                     currentUser.Patronymic = patronymic[random.Next(femaleForenames.Length - 1)] + "ич";
                 }
-
-                currentUser.Role = _roleList[random.Next(_roleList.Count - 1)];
 
                 currentUser.DateOfBirth = new(random.Next(DateTime.Now.Year - 59, DateTime.Now.Year - 18),
                                               random.Next(1, 12),
@@ -143,7 +141,7 @@ namespace VacationScheduleApp.Windows
 
         private void VacationButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuFrame.Navigate(new VacationPage(_vacationList));
+            MenuFrame.Navigate(new VacationPage(_vacationList,_roleList));
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

@@ -14,11 +14,12 @@ namespace VacationScheduleApp.Models
         public string? Surname { get; set; }
         public string? Patronymic { get; set; }
         public bool Gender { get; set; }
-        public Role? Role { get; set; }
+        public Role Role { get; set; }
         public DateTime DateOfBirth { get; set; }
         public virtual ICollection<Vacation> Vacation { get; set; }
-        public User() 
+        public User(Role role) 
         {
+            Role = role;
             Vacation = new List<Vacation>();
         }
     }
