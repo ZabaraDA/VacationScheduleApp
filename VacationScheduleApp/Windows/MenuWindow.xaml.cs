@@ -16,12 +16,6 @@ using VacationScheduleApp.Pages;
 
 namespace VacationScheduleApp.Windows
 {
-    /// <summary>
-    /// Главное меню
-    /// </summary>
-    /// <remarks>
-    /// Осуществляет навигацию по модулям системы
-    /// </remarks>
     public partial class MenuWindow : Window
     {
         private List<Role> _roleList = new List<Role>()
@@ -47,7 +41,7 @@ namespace VacationScheduleApp.Windows
             InitializeComponent();
             _vacationList = new List<Vacation>();
             _userList = GenerateUser();
-            MenuFrame.Navigate(new UserPage(_userList));
+            MenuFrame.Navigate(new UserPage(_userList, _vacationList));
         }
 
         private List<User> GenerateUser()
@@ -136,7 +130,7 @@ namespace VacationScheduleApp.Windows
 
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuFrame.Navigate(new UserPage(_userList));
+            MenuFrame.Navigate(new UserPage(_userList, _vacationList));
         }
 
         private void VacationButton_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:VacationScheduleApp.Pages"
       xmlns:converter="clr-namespace:VacationScheduleApp.Converters"
       mc:Ignorable="d"
-      Title="VacationPage">
+      Loaded="Page_Loaded">
     <Page.Resources>
         <converter:DayConverter x:Key="DayConverter"/>
         <Style TargetType="{x:Type TextBlock}">
@@ -81,7 +81,7 @@
                        Style="{StaticResource InfoTextBlock}"/>
             <ComboBox Name="IntersectionComboBox"
                       SelectedIndex="0">
-                <ComboBoxItem Content="С пересечением"/>
+                <ComboBoxItem Content="Все отпуска"/>
                 <ComboBoxItem Content="Без пересечения"/>
             </ComboBox>
 

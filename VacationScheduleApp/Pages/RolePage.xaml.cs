@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace VacationScheduleApp.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для RolePage.xaml
-    /// </summary>
     public partial class RolePage : Page
     {
         public RolePage()

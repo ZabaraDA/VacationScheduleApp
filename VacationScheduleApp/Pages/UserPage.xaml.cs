@@ -16,25 +16,21 @@ using VacationScheduleApp.Models;
 
 namespace VacationScheduleApp.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для UserPage.xaml
-    /// </summary>
     public partial class UserPage : Page
     {
-        public UserPage(List<User> userList)
+        private List<Vacation> _vacationList;
+        public UserPage(List<User> userList, List<Vacation> vacationList)
         {
             InitializeComponent();
+            _vacationList = vacationList;
             UserDataGrid.ItemsSource = userList;
-        }
-
-        private void ViewVacationButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void AddVacationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = (Button)sender;
+            User user = (User)button.DataContext;
+            NavigationService.Navigate(new AddVacationPage(user, _vacationList));
         }
     }
 }

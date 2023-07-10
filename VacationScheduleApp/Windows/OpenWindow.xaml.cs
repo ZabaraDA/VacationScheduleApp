@@ -16,9 +16,6 @@ using VacationScheduleApp.Windows;
 
 namespace VacationScheduleApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class OpenWindow : Window
     {
         public OpenWindow()

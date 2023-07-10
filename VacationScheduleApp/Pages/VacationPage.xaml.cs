@@ -18,9 +18,6 @@ using VacationScheduleApp.Models;
 
 namespace VacationScheduleApp.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для VacationPage.xaml
-    /// </summary>
     public partial class VacationPage : Page
     {
         private List<Vacation> _filterVacationList;
@@ -35,7 +32,6 @@ namespace VacationScheduleApp.Pages
             RoleComboBox.DisplayMemberPath = "Name";
 
             _vacationList = vacationList;
-            FilterVacationList();
 
             RoleComboBox.SelectionChanged += ComboBox_SelectionChanged;
             GenderComboBox.SelectionChanged += ComboBox_SelectionChanged;
@@ -98,7 +94,6 @@ namespace VacationScheduleApp.Pages
                             break;
                         }
                     }
-
                     intersectionList.Add((vacation.StartDate, vacation.EndDate));
                     if (isIntersection == false)
                     {
@@ -112,7 +107,7 @@ namespace VacationScheduleApp.Pages
 
         private void AddVacationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -120,22 +115,9 @@ namespace VacationScheduleApp.Pages
             FilterVacationList();
         }
 
-        //private void IntersectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ComboBox comboBox = (ComboBox)sender;
-        //    if (comboBox.SelectedIndex == 0)
-        //    {
-        //        RoleComboBox.IsEnabled = true;
-        //        AgeComboBox.IsEnabled = true;
-        //        GenderComboBox.IsEnabled = true;
-        //    }
-        //    else 
-        //    {
-        //        RoleComboBox.IsEnabled = false;
-        //        AgeComboBox.IsEnabled = false;
-        //        GenderComboBox.IsEnabled = false;
-        //    }
-        //    FilterVacationList();
-        //}
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FilterVacationList();
+        }
     }
 }

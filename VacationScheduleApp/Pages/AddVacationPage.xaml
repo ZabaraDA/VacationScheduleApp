@@ -4,11 +4,98 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VacationScheduleApp.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
       Title="AddVacationPage">
-
+    <Page.Resources>
+        <ContextMenu x:Key="TextBoxContextMenu" Background="White">
+            <MenuItem Command="ApplicationCommands.Copy"/>
+            <MenuItem Command="ApplicationCommands.Cut"/>
+        </ContextMenu>
+       
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="10 10 10 0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource BaseTextBoxStyle}">
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="10 10 10 0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type DatePicker}"
+               BasedOn="{StaticResource BaseDatePickerStyle}">
+            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Margin" Value="10 10 10 0"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Border Background="White"
+                CornerRadius="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect Direction="0" 
+                                  ShadowDepth="0" 
+                                  BlurRadius="15" 
+                                  Opacity="0.6"/>
+            </Border.Effect>
+            <StackPanel Margin="10"
+                        Width="300"
+                        Height="420">
+                <TextBlock Text="Новый отпуск"
+                           FontSize="20"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="ФИО сотрудника"/>
+                <TextBox IsEnabled="False">
+                    <TextBox.Text>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="User.Surname"/>
+                            <Binding Path="User.Forename"/>
+                            <Binding Path="User.Patronymic"/>
+                        </MultiBinding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="Код"/>
+                <TextBox Text="{Binding Id}"
+                         IsEnabled="False"/>
+                <TextBlock Text="Дата начала"/>
+                <DatePicker Name="StartDateDatePicker"
+                            SelectedDate="{Binding StartDate,Mode=TwoWay}"
+                            SelectedDateChanged="StartDateDatePicker_SelectedDateChanged"/>
+                <TextBlock Text="Время отпуска (дней)"/>
+                <TextBox Name="QuantityTextBox"
+                         TextChanged="QuantityTextBox_TextChanged"
+                         ContextMenu="{StaticResource TextBoxContextMenu}"
+                         PreviewKeyDown="QuantityTextBox_PreviewKeyDown"/>
+                <TextBlock Text="Дата окончания"/>
+                <DatePicker Name="EndDateDatePicker"
+                            IsEnabled="False"
+                            SelectedDate="{Binding EndDate,Mode=OneWayToSource}"/>
+                <Button Content="Сохранить"
+                        Name="AddVacatoinButton"
+                        Click="AddVacatoinButton_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}"
+               BasedOn="{StaticResource BaseButtonStyle}">
+                            <Setter Property="Width" Value="210"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="Margin" Value="20"/>
+                            <Setter Property="Padding" Value="5 0"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontFamily" Value="{StaticResource Blogger Sans}"/>
+                            <Setter Property="Background" Value="LightGray"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

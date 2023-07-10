@@ -85,10 +85,6 @@
                                 <Button Content="Новый отпуск"
                                     Name="AddVacationButton"
                                     Click="AddVacationButton_Click"/>
-                                <Button Content="Просмотр отпусков"
-                                    Name="ViewVacationButton"
-                                    Click="ViewVacationButton_Click"/>
-                                
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
