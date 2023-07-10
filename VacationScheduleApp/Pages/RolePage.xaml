@@ -9,6 +9,23 @@
       Title="RolePage">
 
     <Grid>
-        
+        <DataGrid Name="RoleDataGrid"
+                  BorderThickness="0 0 0 1"
+                  BorderBrush="LightGray"
+                  Margin="10"
+                  Background="LightGray"
+                  AutoGenerateColumns="False"
+                  GridLinesVisibility="Vertical"
+                  VerticalGridLinesBrush="LightGray"
+                  ColumnWidth="*"
+                  HorizontalAlignment="Center"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}"
+                                    Header="Код"/>
+                <DataGridTextColumn Binding="{Binding Name}"
+                                    Header="Наименование"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

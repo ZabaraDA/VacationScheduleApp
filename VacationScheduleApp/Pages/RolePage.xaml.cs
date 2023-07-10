@@ -12,14 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VacationScheduleApp.Models;
 
 namespace VacationScheduleApp.Pages
 {
     public partial class RolePage : Page
     {
-        public RolePage()
+        public RolePage(List<Role> roleList)
         {
             InitializeComponent();
+            RoleDataGrid.ItemsSource = roleList;
         }
     }
 }

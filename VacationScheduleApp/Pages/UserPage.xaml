@@ -9,16 +9,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Background="White"/>
         <DataGrid Name="UserDataGrid"
                   BorderThickness="0 0 0 1"
                   BorderBrush="LightGray"
                   Margin="10"
-                  Grid.Row="1"
                   Background="LightGray" 
                   AutoGenerateColumns="False"
                   GridLinesVisibility="Vertical"

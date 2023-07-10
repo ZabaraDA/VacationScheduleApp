@@ -171,7 +171,7 @@ namespace VacationScheduleApp.Windows
 
         private void RoleButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuFrame.Navigate(new RolePage());
+            MenuFrame.Navigate(new RolePage(_roleList));
         }
     }
 }
